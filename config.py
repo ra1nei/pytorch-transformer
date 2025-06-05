@@ -7,7 +7,7 @@ def get_config():
         "lr": 10**-4,
         "seq_len": 80,
         "d_model": 512,
-        "datasource": 'test',
+        "datasource": 'harouzie/vi_en-translation',
         "lang_src": "English",
         "lang_tgt": "Vietnamese",
         "model_folder": "weights",
