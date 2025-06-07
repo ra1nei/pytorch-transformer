@@ -10,6 +10,9 @@ def get_config():
         "datasource": 'harouzie/vi_en-translation',
         "lang_src": "English",
         "lang_tgt": "Vietnamese",
+
+        "model_weights_base_path": "/kaggle/input/best/pytorch/default/1",
+
         "model_folder": "weights",
         "model_basename": "tmodel_",
         "preload": "latest",
@@ -18,16 +21,18 @@ def get_config():
     }
 
 def get_weights_file_path(config, epoch: str):
-    model_folder = f"{config['datasource']}_{config['model_folder']}"
+    model_folder_path = Path(config['model_weights_base_path'])
     model_filename = f"{config['model_basename']}{epoch}.pt"
-    return str(Path('.') / model_folder / model_filename)
+    return str(model_folder_path / model_filename)
 
 # Find the latest weights file in the weights folder
 def latest_weights_file_path(config):
-    model_folder = f"{config['datasource']}_{config['model_folder']}"
-    model_filename = f"{config['model_basename']}*"
-    weights_files = list(Path(model_folder).glob(model_filename))
+    model_folder_path = Path(config['model_weights_base_path'])
+    model_filename_pattern = f"{config['model_basename']}*.pt" # Thêm .pt để chỉ tìm file pt
+    weights_files = list(model_folder_path.glob(model_filename_pattern))
+    
     if len(weights_files) == 0:
         return None
     weights_files.sort()
     return str(weights_files[-1])
+
