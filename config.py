@@ -8,7 +8,6 @@ def get_config():
         "seq_len": 80,
         "d_model": 512,
         "datasource": 'harouzie/vi_en-translation',
-        # "datasource": 'kaggle/input',
         "lang_src": "English",
         "lang_tgt": "Vietnamese",
         "model_folder": "weights",
